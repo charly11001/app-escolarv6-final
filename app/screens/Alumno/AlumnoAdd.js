@@ -4,27 +4,33 @@ import { Button } from "react-native-elements"
 
 export default function AlumnoAdd() {
 
-    const [txtNombre, setNombre] = useState('Escribe el nombre ...')
     const [txtNoControl, setnoControl] = useState('Escribe el No. Control ...')
+
+    const [txtNombre, setNombre] = useState('Escribe el nombre ...')
+    
     const [txtCarrera, setCarrera] = useState('Escribe la carrera ...')
     const [btnEnviar, setEnviar] = useState('')
 
     return (
         <ScrollView centerContent={true} style={styles.viewBody}>
             <View>
-                <Text style={styles.textTitle}>Agregar Alumnos ...</Text>
-                <Text>Nombre de alumnos</Text>
-                <TextInput
-                    style={styles.input}
-                    placeholder={txtNombre}
-                    onChangeText={n => setNombre(n)}
-                />
-                <Text>No de Control</Text>
+
+              
+
+                <Text>No. de Control</Text>
                 <TextInput
                     style={styles.input}
                     placeholder={txtNoControl}
                     onChangeText={nc => setnoControl(nc)}
                 />
+
+                <Text>Nombre del alumno</Text>
+                <TextInput
+                    style={styles.input}
+                    placeholder={txtNombre}
+                    onChangeText={n => setNombre(n)}
+                />
+
                 <Text>Carrera</Text>
                 <TextInput
                     style={styles.input}
@@ -39,10 +45,14 @@ export default function AlumnoAdd() {
                         setEnviar(txtNoControl)
                     }}
                 />
-                <Text style={styles.textTitle}>DATOS DEL ALUMNO</Text>
-                <Text>NOMBRE: {txtNombre}</Text>
-                <Text>NO. CONTROL: {txtNoControl}</Text>
-                <Text>CARRERA: {txtCarrera}</Text>
+                <Text style={styles.textTitle}>Datos del alumno</Text>
+                
+                <Text>No. de control:     </Text>
+
+                <Text>Nombre: {txtNombre}</Text>
+
+                <Text>Carrera: {txtCarrera}</Text>
+                
                 <Text>TEXTO DE BOTON {btnEnviar}</Text>
             </View>
         </ScrollView>
@@ -52,6 +62,7 @@ export default function AlumnoAdd() {
 const styles = StyleSheet.create({
     viewBody: {
         marginLeft: 30,
+        marginTop: 20,
         marginRight: 30
     },
     textTitle: {
@@ -68,7 +79,7 @@ const styles = StyleSheet.create({
         width: "90%"
     },
     btnStyle: {
-        backgroundColor: "#00a680"
+        backgroundColor: "#800600"
     },
     btnContainer: {
         width: "90%",

@@ -20,7 +20,7 @@ export default function AlumnosStack() {
         options={{
           title: "Alumnos",
           headerStyle: {
-            backgroundColor: '#00a680',
+            backgroundColor: '#ffffff',
           }
         }}
         navigationOptions={

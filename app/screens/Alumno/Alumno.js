@@ -12,7 +12,14 @@ export default function Alumno() {
       {/* source={{ uri: 'https://source.unsplash.com/daily' }} */}
       <Image
         style={styles.photo}
-        source={{ uri: 'https://source.unsplash.com/featured/?{student}' }}
+
+         source={require('./../../../assets/Alumnos.png')} 
+        
+        
+       // source={{ uri: 'https://source.unsplash.com/featured/?{student}' }}
+      
+      
+      
       />
       <Button
         title="Agregar alumno"
@@ -61,7 +68,7 @@ const styles = StyleSheet.create({
     marginTop: 0
   },
   btnStyle: {
-    backgroundColor: "#00a680"
+    backgroundColor: "#800600"
   },
   btnContainer: {
     width: "70%",
@@ -72,8 +79,8 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   photo: {
-    height: 240,
-    width: 240,
+    height: 140,
+    width: 140,
     marginBottom: 20,
     marginTop: 20
   }

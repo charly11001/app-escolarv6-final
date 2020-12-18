@@ -24,21 +24,21 @@ export default function Grupo() {
       />
 
       <Button
-        title="Detalle de grupo"
+        title="Detalle del grupo"
         buttonStyle={styles.btnStyle}
         containerStyle={styles.btnContainer}
         onPress={() => navigation.navigate("grupos-det")}
       />
 
       <Button
-        title="Lista de grupo"
+        title="Lista del grupo"
         buttonStyle={styles.btnStyle}
         containerStyle={styles.btnContainer}
         onPress={() => navigation.navigate("grupos-list")}
       />
 
       <Button
-        title="Lista de grupo por carrera"
+        title="Lista del grupo por carrera"
         buttonStyle={styles.btnStyle}
         containerStyle={styles.btnContainer}
         onPress={() => navigation.navigate("grupos-carr")}

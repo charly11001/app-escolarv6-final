@@ -66,7 +66,7 @@ const styles = StyleSheet.create({
         width: "90%"
     },
     btnStyle: {
-        backgroundColor: "#00a680"
+        backgroundColor: "#800600"
     },
     btnContainer: {
         width: "90%",

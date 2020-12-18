@@ -5,8 +5,14 @@ import { Icon } from "react-native-elements";
 import AlumnosStack from "./AlumnoStack";
 import GruposStack from "./GrupoStack";
 import MaestrosStack from "./MaestroStack";
-import MateriasStack from "./MateriaStack";
-import PromediosStack from "./PromedioStack";
+
+
+import CarrerasStack from "./CarreraStack";
+import CursosStack from "./CursoStack";
+import DocentesStack from "./DocenteStack";
+import CalificacionesStack from "./CalificacionStack";
+
+
 
 const Tab = createBottomTabNavigator();
 
@@ -14,7 +20,7 @@ export default function Navigation() {
   return (
     <NavigationContainer>
       <Tab.Navigator
-        initialRouteName="grupos"
+        initialRouteName="alumnos"
         tabBarOptions={{
           inactiveTintColor: "#646464",
           activeTintColor: "#00a680"
@@ -33,21 +39,44 @@ export default function Navigation() {
           component={GruposStack}
           options={{ title: "Grupos" }}
         />
-        <Tab.Screen
+        
+        
+        {/* <Tab.Screen
           name="maestros"
           component={MaestrosStack}
           options={{ title: "Maestros" }}
+        /> */}
+        
+       
+
+      <Tab.Screen
+          name="carreras"
+          component={CarrerasStack}
+          options={{ title: "Carreras" }}
         />
+  
+
+       <Tab.Screen
+          name="cursos"
+          component={CursosStack}
+          options={{ title: "Cursos" }}
+        />
+
         <Tab.Screen
-          name="materias"
-          component={MateriasStack}
-          options={{ title: "Materias" }}
+          name="docentes"
+          component={DocentesStack}
+          options={{ title: "Docentes" }}
         />
+
+
         <Tab.Screen
-          name="promedios"
-          component={PromediosStack}
-          options={{ title: "Promedios" }}
+          name="calificaciones"
+          component={CalificacionesStack}
+          options={{ title: "Calificaciones" }}
         />
+
+
+
       </Tab.Navigator>
     </NavigationContainer>
   );
@@ -65,12 +94,29 @@ function screenOptions(route, color) {
     case "maestros":
       iconName = "account-check";
       break;
-    case "materias":
-      iconName = "book";
+    
+
+    case "carreras":
+      iconName = "seal-variant";
       break;
-    case "promedios":
-      iconName = "chart-bar";
+
+      case "cursos":
+      iconName = "language-php";
       break;
+
+      
+      case "docentes":
+      iconName = "account-check";
+      break;
+
+
+      case "calificaciones":
+        iconName = "pen";
+        break;
+  
+
+
+
     default:
       break;
   }
