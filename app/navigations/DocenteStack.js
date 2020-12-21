@@ -28,6 +28,7 @@ export default function AlumnosStack() {
         component={DocentesDet}
         options={{ title: "Detalle de los docentes" }}
       />
+      
       <Stack.Screen
         name="docentes-list"
         component={DocentesList}

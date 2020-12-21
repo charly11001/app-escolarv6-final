@@ -1,47 +1,42 @@
 import React, { useState } from "react";
-import { Image, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import { Button } from "react-native-elements"
 
 export default function CarreraAdd() {
 
-    const [txtClave, setClave] = useState('Escribe clave de la carrera ...')
-    const [txtNombre, setNombre] = useState('Escribe el nombre de la carrera ...')
-    const [btnAgregar, setAgregar] = useState('')
+    const [txtCarrera, setCarrera] = useState('Escribe el nombre de la carrera')
+    const [btnEnviar, setEnviar] = useState('')
 
     return (
         <ScrollView centerContent={true} style={styles.viewBody}>
-            <View style={styles.viewBtn}>
-                <Image
-                    style={styles.photo}
-                    source={require('../../../assets/alumnosAdd1.png')}
-                />
-                <Text>Clave de la Carrera</Text>
+            <View>
+                <Text>Nombre de la carrera</Text>
                 <TextInput
                     style={styles.input}
-                    placeholder={txtClave}
-                    onChangeText={c => setClave(c)}
-                />
-                <Text>Nombre de la Carrera</Text>
-                <TextInput
-                    style={styles.input}
-                    placeholder={txtNombre}
-                    onChangeText={n => setNombre(n)}
+                    placeholder={txtCarrera}
+                    onChangeText={n => setCarrera(n)}
                 />
                 <Button
                     title="Agregar carrera"
                     buttonStyle={styles.btnStyle}
                     containerStyle={styles.btnContainer}
                     onPress={() => {
-                        setAgregar(txtNombre)
-                        setClave("")
-                        setNombre("")
-
+                        fetch('http://192.168.100.2:3000/carreras/', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                nomCarrera: txtCarrera
+                            })
+                        }).then(() => {
+                            alert('Carrera agregada')
+                            navigation.navigate('carreras')
+                        })
                     }}
                 />
-
-                <Text>Clave de grupo: {txtClave}</Text>
-                <Text>Clave de grupo: {txtNombre}</Text>
-                <Text>ENVIADO: {btnAgregar}</Text>
+                <Text style={styles.textTitle}>DATOS DE LA CARRERA</Text>
+                <Text>NOMBRE: {txtCarrera}</Text>
             </View>
         </ScrollView>
     );
@@ -66,20 +61,10 @@ const styles = StyleSheet.create({
         width: "90%"
     },
     btnStyle: {
-        backgroundColor: "#800600"
+        backgroundColor: "#00a680"
     },
     btnContainer: {
         width: "90%",
         marginBottom: 10
-    },
-    photo: {
-        height: 120,
-        width: 120,
-        marginBottom: 20,
-        marginTop: 20
-    },
-    viewBtn: {
-        flex: 6,
-        alignItems: "center"
     }
 })

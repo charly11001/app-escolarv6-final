@@ -3,18 +3,14 @@ import { Image, StyleSheet, View, Text } from "react-native";
 import { Button, ListItem, Icon } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native"
 
-export default function carrera() {
+export default function Carrera() {
   const navigation = useNavigation();
   return (
     <View style={styles.viewBtn}>
-      {/* source={{ uri: 'https://source.unsplash.com/daily' }} */}
-      {/* source={require('../../../assets/groups_people1.png')} */}
-      {/* source={{ uri: 'https://source.unsplash.com/featured/?{student}' }} */}
-      {/* source={{ uri: 'https://source.unsplash.com/featured/?group' }} */}
+
       <Image
         style={styles.photo}
-        source={require('./../../../assets/Carreras2.jpg')} 
-
+        source={{ uri: 'https://source.unsplash.com/featured/?{student}' }}
       />
       <Button
         title="Agregar carrera"
@@ -22,26 +18,11 @@ export default function carrera() {
         containerStyle={styles.btnContainer}
         onPress={() => navigation.navigate("carreras-add")}
       />
-
       <Button
-        title="Detalle de la carrera"
-        buttonStyle={styles.btnStyle}
-        containerStyle={styles.btnContainer}
-        onPress={() => navigation.navigate("carreras-det")}
-      />
-
-      <Button
-        title="Lista de carreras"
+        title="Lista de Carreras"
         buttonStyle={styles.btnStyle}
         containerStyle={styles.btnContainer}
         onPress={() => navigation.navigate("carreras-list")}
-      />
-
-      <Button
-        title="Lista de grupos por carrera"
-        buttonStyle={styles.btnStyle}
-        containerStyle={styles.btnContainer}
-        onPress={() => navigation.navigate("carreras-carr")}
       />
 
     </View>
@@ -49,28 +30,33 @@ export default function carrera() {
 }
 
 const styles = StyleSheet.create({
+
   textTitle: {
     marginTop: 20,
+    marginBottom: 20,
     textAlign: "center",
     fontSize: 30,
     fontWeight: "bold"
   },
-  photo: {
-    height: 140,
-    width: 140,
-    marginBottom: 20,
-    marginTop: 20
-  },
-  viewBtn: {
-    flex: 6,
-    alignItems: "center"
+  listStyle: {
+    marginTop: 0
   },
   btnStyle: {
-    backgroundColor: "#800600"
+    backgroundColor: "#00a680"
   },
   btnContainer: {
     width: "70%",
     marginBottom: 10
   },
+  viewBtn: {
+    flex: 6,
+    alignItems: "center"
+  },
+  photo: {
+    height: 240,
+    width: 240,
+    marginBottom: 20,
+    marginTop: 20
+  }
 });
 

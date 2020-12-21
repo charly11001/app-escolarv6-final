@@ -4,13 +4,13 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Icon } from "react-native-elements";
 import AlumnosStack from "./AlumnoStack";
 import GruposStack from "./GrupoStack";
-import MaestrosStack from "./MaestroStack";
+
 
 
 import CarrerasStack from "./CarreraStack";
 import CursosStack from "./CursoStack";
 import DocentesStack from "./DocenteStack";
-import CalificacionesStack from "./CalificacionStack";
+
 
 
 
@@ -40,14 +40,7 @@ export default function Navigation() {
           options={{ title: "Grupos" }}
         />
         
-        
-        {/* <Tab.Screen
-          name="maestros"
-          component={MaestrosStack}
-          options={{ title: "Maestros" }}
-        /> */}
-        
-       
+                  
 
       <Tab.Screen
           name="carreras"
@@ -69,11 +62,7 @@ export default function Navigation() {
         />
 
 
-        <Tab.Screen
-          name="calificaciones"
-          component={CalificacionesStack}
-          options={{ title: "Calificaciones" }}
-        />
+      
 
 
 
@@ -91,9 +80,7 @@ function screenOptions(route, color) {
     case "grupos":
       iconName = "account-group";
       break;
-    case "maestros":
-      iconName = "account-check";
-      break;
+    
     
 
     case "carreras":
@@ -110,9 +97,6 @@ function screenOptions(route, color) {
       break;
 
 
-      case "calificaciones":
-        iconName = "pen";
-        break;
   
 
 

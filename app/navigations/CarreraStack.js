@@ -6,8 +6,6 @@ import CarrerasDet from "../screens/Carrera/CarreraDet";
 import CarrerasList from "../screens/Carrera/CarreraList";
 
 
-
-
 const Stack = createStackNavigator();
 
 export default function AlumnosStack() {
@@ -23,23 +21,20 @@ export default function AlumnosStack() {
         component={CarrerasAdd}
         options={{ title: "Agregar Carreras" }}
       />
-      <Stack.Screen
-        name="carreras-det"
-        component={CarrerasDet}
-        options={{ title: "Detalle de Carreras" }}
-      />
+ 
       <Stack.Screen
         name="carreras-list"
         component={CarrerasList}
         options={{ title: "Lista de Carreras" }}
       />
-      
-      
-      
-    
-    
-    
-    
+   
+
+   <Stack.Screen
+        name="carreras-det"
+        component={CarrerasDet}
+        options={{ title: "Detalle de Carreras" }}
+      />
+
     </Stack.Navigator>
   );
 }

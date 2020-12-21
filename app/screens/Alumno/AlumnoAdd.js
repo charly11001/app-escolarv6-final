@@ -47,13 +47,12 @@ export default function AlumnoAdd() {
                 />
                 <Text style={styles.textTitle}>Datos del alumno</Text>
                 
-                <Text>No. de control:     </Text>
+                <Text>No. de control: {txtNoControl}     </Text>
 
                 <Text>Nombre: {txtNombre}</Text>
 
                 <Text>Carrera: {txtCarrera}</Text>
-                
-                <Text>TEXTO DE BOTON {btnEnviar}</Text>
+               
             </View>
         </ScrollView>
     );

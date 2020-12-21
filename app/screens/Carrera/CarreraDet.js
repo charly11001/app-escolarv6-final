@@ -1,60 +1,27 @@
-import React from "react";
-import { Image, Dimensions, ImageBackground, StyleSheet, Text, View } from "react-native";
+import React from 'react';
+import { StyleSheet, Text, View, Button } from 'react-native';
+import useFetch from '../../hooks/useFetch';
 
-export default function CarreraDet() {
+export default function CarreraDet({ route, navigation }) {
+    const { id, nomCarrera } = route.params;
+
+    const { loading, data } = useFetch(`http://192.168.100.2:3000/carreras/${id}`)
     return (
-        <View style={styles.center}>
-            <ImageBackground
-                style={styles.photo}
-                source={{ uri: 'https://source.unsplash.com/featured/?{group}' }}
-            >
-                <Text style={styles.textTitle}>CARRERAS</Text>
-                <Image
-                    style={styles.photo1}
-                    source={require('../../../assets/groups_people1.png')}
-
-                />
-            </ImageBackground>
-
+        <View style={styles.container}>
+            {loading ? <Text>Cargando ...</Text> :
+                <>
+                    <Text>{data.id}</Text>
+                    <Text>{data.nomCarrera}</Text>
+                </>
+            }
         </View>
-    );
+    )
 }
 
-
 const styles = StyleSheet.create({
-    center: {
+    container: {
         flex: 1,
         alignItems: 'center',
         justifyContent: 'center'
-    },
-    container: {
-        flex: 1,
-        backgroundColor: '#fff',
-        alignItems: 'stretch',
-        justifyContent: 'center',
-        paddingTop: 22
-    },
-    item: {
-        padding: 10,
-        fontSize: 22,
-        height: 50,
-        borderBottomColor: '#ccc',
-        borderBottomWidth: 1
-    },
-    photo: {
-        height: 700,
-        width: 330
-    },
-    photo1: {
-        height: 140,
-        width: 140
-    },
-    textTitle: {
-        marginTop: 20,
-        marginBottom: 20,
-        textAlign: "center",
-        fontSize: 30,
-        fontWeight: "bold",
-        color: '#FFF'
     }
 })

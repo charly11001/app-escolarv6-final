@@ -1,56 +1,42 @@
-import React, { useState, useEffect } from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, View, Text } from "react-native";
+import { FlatList } from 'react-native-gesture-handler';
+import ListItem from '../../components/Grupo/ListItem';
+import useFetch from '../../hooks/useFetch';
+import GruposDet from "../../screens/Grupo/GrupoDet";
 
 
-export default function GrupoList() {
+export default function GrupoList({ navigation }) {
 
-    const [users, setUsers] = useState([])
-    const [loading, setLoading] = useState(true)
-
-    useEffect(() => {
-        fetch('https://jsonplaceholder.typicode.com/users')
-            .then(response => response.json())
-            .then(data => {
-                setUsers(data)
-                setLoading(false)
-            })
-    }, [])
-
-    if (loading) {
-        return <View style={styles.center}><Text>Cargando ...</Text></View>
-    }
-
+    const { loading, data: grupos } = useFetch('http://192.168.100.2:3000/grupos')
 
     return (
-        <View style={styles.container} >
-            <FlatList
-                data={users}
-                renderItem={({ item }) => <Text style={styles.item}>{item.name}</Text>}
-                keyExtractor={item => String(item.id)}
-            />
-        </View >
+        <View style={styles.container}>
+            {loading ? <Text>Cargando ...</Text> :
+                <FlatList
+                    style={styles.list}
+                    data={grupos}
+                    keyExtractor={x => x.id}
+                    renderItem={({ item }) =>
+                        <ListItem
+                            onPress={() => navigation.navigate('grupos-det', { id: item.id, nomGrupo: item.nomGrupo })}
+                            nomGrupo={item.nomGrupo}
+                        />
+                    }
+                />}
+        </View>
     );
 }
 
-
 const styles = StyleSheet.create({
-    center: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
     container: {
         flex: 1,
         backgroundColor: '#fff',
-        alignItems: 'stretch',
-        justifyContent: 'center',
-        paddingTop: 22
+        alignItems: 'flex-start',
+        justifyContent: 'flex-start',
     },
-    item: {
-        padding: 10,
-        fontSize: 22,
-        height: 50,
-        borderBottomColor: '#ff0000',
-        borderBottomWidth: 1
-    },
-})
+    list: {
+        alignSelf: 'stretch',
+    }
+});
+

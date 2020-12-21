@@ -1,47 +1,42 @@
 import React, { useState } from "react";
-import { Image, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import { Button } from "react-native-elements"
 
 export default function GrupoAdd() {
 
-    const [txtClave, setClave] = useState('Escribe clave grupo ...')
-    const [txtNombre, setNombre] = useState('Escribe nombre grupo ...')
-    const [btnAgregar, setAgregar] = useState('')
+    const [txtGrupo, setGrupo] = useState('Escribe el Nombre del grupo')
+    const [btnEnviar, setEnviar] = useState('')
 
     return (
         <ScrollView centerContent={true} style={styles.viewBody}>
-            <View style={styles.viewBtn}>
-                <Image
-                    style={styles.photo}
-                    source={require('../../../assets/alumnosAdd1.png')}
-                />
-                <Text>Clave Grupo</Text>
+            <View>
+                <Text>Nombre de grupo</Text>
                 <TextInput
                     style={styles.input}
-                    placeholder={txtClave}
-                    onChangeText={c => setClave(c)}
-                />
-                <Text>Nombre Grupo</Text>
-                <TextInput
-                    style={styles.input}
-                    placeholder={txtNombre}
-                    onChangeText={n => setNombre(n)}
+                    placeholder={txtGrupo}
+                    onChangeText={n => setGrupo(n)}
                 />
                 <Button
                     title="Agregar grupo"
                     buttonStyle={styles.btnStyle}
                     containerStyle={styles.btnContainer}
                     onPress={() => {
-                        setAgregar(txtNombre)
-                        setClave("")
-                        setNombre("")
-
+                        fetch('http://192.168.100.2:3000/grupos/', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                nomGrupo: txtGrupo
+                            })
+                        }).then(() => {
+                            alert('Grupo agregado')
+                            navigation.navigate('grupos')
+                        })
                     }}
                 />
-
-                <Text>Clave de grupo: {txtClave}</Text>
-                <Text>Clave de grupo: {txtNombre}</Text>
-                <Text>ENVIADO: {btnAgregar}</Text>
+                <Text style={styles.textTitle}>DATOS DEL GRUPO</Text>
+                <Text>NOMBRE: {txtGrupo}</Text>
             </View>
         </ScrollView>
     );
@@ -66,20 +61,10 @@ const styles = StyleSheet.create({
         width: "90%"
     },
     btnStyle: {
-        backgroundColor: "#800600"
+        backgroundColor: "#00a680"
     },
     btnContainer: {
         width: "90%",
         marginBottom: 10
-    },
-    photo: {
-        height: 120,
-        width: 120,
-        marginBottom: 20,
-        marginTop: 20
-    },
-    viewBtn: {
-        flex: 6,
-        alignItems: "center"
     }
 })

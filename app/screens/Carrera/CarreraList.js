@@ -1,56 +1,42 @@
-import React, { useState, useEffect } from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, View, Text } from "react-native";
+import { FlatList } from 'react-native-gesture-handler';
+import ListItem from '../../components/Carrera/ListItem';
+import useFetch from '../../hooks/useFetch';
+import CarrerasDet from "../../screens/Carrera/CarreraDet";
 
 
-export default function CarreraList() {
+export default function CarreraList({ navigation }) {
 
-    const [users, setUsers] = useState([])
-    const [loading, setLoading] = useState(true)
-
-    useEffect(() => {
-        fetch('https://jsonplaceholder.typicode.com/users')
-            .then(response => response.json())
-            .then(data => {
-                setUsers(data)
-                setLoading(false)
-            })
-    }, [])
-
-    if (loading) {
-        return <View style={styles.center}><Text>Cargando ...</Text></View>
-    }
-
+    const { loading, data: carreras } = useFetch('http://192.168.100.2:3000/carreras')
 
     return (
-        <View style={styles.container} >
-            <FlatList
-                data={users}
-                renderItem={({ item }) => <Text style={styles.item}>{item.name}</Text>}
-                keyExtractor={item => String(item.id)}
-            />
-        </View >
+        <View style={styles.container}>
+            {loading ? <Text>Cargando ...</Text> :
+                <FlatList
+                    style={styles.list}
+                    data={carreras}
+                    keyExtractor={x => x.id}
+                    renderItem={({ item }) =>
+                        <ListItem
+                            onPress={() => navigation.navigate('carreras-det', { id: item.id, nomCarrera: item.nomCarrera })}
+                            nomCarrera={item.nomGrupo}
+                        />
+                    }
+                />}
+        </View>
     );
 }
 
-
 const styles = StyleSheet.create({
-    center: {
-        flex: 1,
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
     container: {
         flex: 1,
         backgroundColor: '#fff',
-        alignItems: 'stretch',
-        justifyContent: 'center',
-        paddingTop: 22
+        alignItems: 'flex-start',
+        justifyContent: 'flex-start',
     },
-    item: {
-        padding: 10,
-        fontSize: 22,
-        height: 50,
-        borderBottomColor: '#ff0000',
-        borderBottomWidth: 1
-    },
-})
+    list: {
+        alignSelf: 'stretch',
+    }
+});
+
