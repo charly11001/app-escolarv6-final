@@ -3,48 +3,64 @@ import React, { useState } from "react";
 import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import { Button } from "react-native-elements"
 
-export default function CarreraAdd() {
+export default function CarreraActualizar() {
     const navigation= useNavigation();
-
+    const [txtIdCarrera, setIdCarrera] = useState('')
     const [txtCarrera, setCarrera] = useState('')
     const [btnEnviar, setEnviar] = useState('')
 
     return (
         <ScrollView centerContent={true} style={styles.viewBody}>
             <View>
+
+            <Text>Id de la carrera</Text>
+               
+               <TextInput style={styles.input}
+                   underlineColorAndroid="transparent"
+                   placeholder="Escribe el id de la carrera"
+                   placeholderTextColor="CA6F1E"
+                   autoCapitalize="none"
+                   autoCapitalize='characters'
+                   onChangeText={(ca) => setIdCarrera(ca)}
+              />
+
                 <Text>Nombre de la carrera</Text>
                
                 <TextInput style={styles.input}
                     underlineColorAndroid="transparent"
-                    placeholder="Escribe la carrera"
+                    placeholder="Escribe el nombre de la carrera"
                     placeholderTextColor="CA6F1E"
                     autoCapitalize="none"
                     autoCapitalize='characters'
                     onChangeText={(n) => setCarrera(n)}
-               />
-               
-              
-               
+               />             
+                            
                 <Button
-                    title="Agregar carrera"
+                    title="Modificar carrera"
                     buttonStyle={styles.btnStyle}
                     containerStyle={styles.btnContainer}
                     onPress={() => {
-                        fetch('http://192.168.100.2:3000/carreras/', {
-                            method: 'POST',
+                        fetch(`http://192.168.100.2:3000/carreras/${txtIdCarrera}`, {
+                            method: 'PUT',
                             headers: {
                                 'Content-Type': 'application/json'
                             },
                             body: JSON.stringify({
+                                
+                                id: Number(txtIdCarrera),
                                 nomCarrera: txtCarrera
                             })
                         }).then(() => {
-                            alert('Carrera agregada')
+
+                            setIdCarrera('Escribe el id de la carrera')
+                            setCarrera('Escribe el nombre de la carrera')
+
+                            alert('Carrera modificada')
                             navigation.navigate('carreras')
                         })
                     }}
                 />
-                <Text style={styles.textTitle}>Datos de la Carrera</Text>
+                <Text style={styles.textTitle}>DATOS DE LA CARRERA</Text>
                 <Text>NOMBRE: {txtCarrera}</Text>
             </View>
         </ScrollView>

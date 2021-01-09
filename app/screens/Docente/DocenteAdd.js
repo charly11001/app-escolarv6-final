@@ -1,47 +1,51 @@
+import { useNavigation } from "@react-navigation/native";
 import React, { useState } from "react";
-import { Image, ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
+import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import { Button } from "react-native-elements"
 
 export default function DocenteAdd() {
+    const navigation= useNavigation();
 
-    const [txtClave, setClave] = useState('Escribe clave del docente...')
-    const [txtNombre, setNombre] = useState('Escribe el nombre del docente...')
-    const [btnAgregar, setAgregar] = useState('')
+    const [txtDocente, setDocente] = useState('')
+    const [btnEnviar, setEnviar] = useState('')
 
     return (
         <ScrollView centerContent={true} style={styles.viewBody}>
-            <View style={styles.viewBtn}>
-                <Image
-                    style={styles.photo}
-                    source={require('../../../assets/alumnosAdd1.png')}
-                />
-                <Text>Clave del docente</Text>
-                <TextInput
-                    style={styles.input}
-                    placeholder={txtClave}
-                    onChangeText={c => setClave(c)}
-                />
+            <View>
                 <Text>Nombre del docente</Text>
-                <TextInput
-                    style={styles.input}
-                    placeholder={txtNombre}
-                    onChangeText={n => setNombre(n)}
-                />
+               
+                <TextInput style={styles.input}
+                    underlineColorAndroid="transparent"
+                    placeholder="Escribe el nombre del docente"
+                    placeholderTextColor="CA6F1E"
+                    autoCapitalize="none"
+                    autoCapitalize='characters'
+                    onChangeText={(n) => setDocente(n)}
+               />
+               
+              
+               
                 <Button
-                    title="Agregar docente"
+                    title="Agregar un docente"
                     buttonStyle={styles.btnStyle}
                     containerStyle={styles.btnContainer}
                     onPress={() => {
-                        setAgregar(txtNombre)
-                        setClave("")
-                        setNombre("")
-
+                        fetch('http://192.168.100.2:3000/docentes/', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                nomDocente: txtDocente
+                            })
+                        }).then(() => {
+                            alert('Docente agregado')
+                            navigation.navigate('docentes')
+                        })
                     }}
                 />
-
-                <Text>Clave del docente: {txtClave}</Text>
-                <Text>Nombre del docente: {txtNombre}</Text>
-                <Text>ENVIADO: {btnAgregar}</Text>
+                <Text style={styles.textTitle}>Datos del docente</Text>
+                <Text>NOMBRE: {txtDocente}</Text>
             </View>
         </ScrollView>
     );
@@ -71,15 +75,5 @@ const styles = StyleSheet.create({
     btnContainer: {
         width: "90%",
         marginBottom: 10
-    },
-    photo: {
-        height: 120,
-        width: 120,
-        marginBottom: 20,
-        marginTop: 20
-    },
-    viewBtn: {
-        flex: 6,
-        alignItems: "center"
     }
 })

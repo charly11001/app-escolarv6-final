@@ -3,49 +3,65 @@ import React, { useState } from "react";
 import { ScrollView, StyleSheet, Text, TextInput, View } from "react-native";
 import { Button } from "react-native-elements"
 
-export default function CarreraAdd() {
+export default function DocenteActualizar() {
     const navigation= useNavigation();
-
-    const [txtCarrera, setCarrera] = useState('')
+    const [txtIdDocente, setIdDocente] = useState('')
+    const [txtDocente, setDocente] = useState('')
     const [btnEnviar, setEnviar] = useState('')
 
     return (
         <ScrollView centerContent={true} style={styles.viewBody}>
             <View>
-                <Text>Nombre de la carrera</Text>
+
+            <Text>Id del docente</Text>
+               
+               <TextInput style={styles.input}
+                   underlineColorAndroid="transparent"
+                   placeholder="Escribe el id del docente"
+                   placeholderTextColor="CA6F1E"
+                   autoCapitalize="none"
+                   autoCapitalize='characters'
+                   onChangeText={(ca) => setIdDocente(ca)}
+              />
+
+                <Text>Nombre del docente</Text>
                
                 <TextInput style={styles.input}
                     underlineColorAndroid="transparent"
-                    placeholder="Escribe la carrera"
+                    placeholder="Escribe el nombre del docente"
                     placeholderTextColor="CA6F1E"
                     autoCapitalize="none"
                     autoCapitalize='characters'
-                    onChangeText={(n) => setCarrera(n)}
-               />
-               
-              
-               
+                    onChangeText={(n) => setDocente(n)}
+               />             
+                            
                 <Button
-                    title="Agregar carrera"
+                    title="Modificar docente"
                     buttonStyle={styles.btnStyle}
                     containerStyle={styles.btnContainer}
                     onPress={() => {
-                        fetch('http://192.168.100.2:3000/carreras/', {
-                            method: 'POST',
+                        fetch(`http://192.168.100.2:3000/docentes/${txtIdDocente}`, {
+                            method: 'PUT',
                             headers: {
                                 'Content-Type': 'application/json'
                             },
                             body: JSON.stringify({
-                                nomCarrera: txtCarrera
+                                
+                                id: Number(txtIdDocente),
+                                nomDocente: txtDocente
                             })
                         }).then(() => {
-                            alert('Carrera agregada')
-                            navigation.navigate('carreras')
+
+                            setIdDocente('Escribe el id del docente')
+                            setDocente('Escribe el nombre del docente')
+
+                            alert('Docente modificado')
+                            navigation.navigate('docentes')
                         })
                     }}
                 />
-                <Text style={styles.textTitle}>Datos de la Carrera</Text>
-                <Text>NOMBRE: {txtCarrera}</Text>
+                <Text style={styles.textTitle}>Datos del docente</Text>
+                <Text>NOMBRE: {txtDocente}</Text>
             </View>
         </ScrollView>
     );

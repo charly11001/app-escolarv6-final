@@ -3,44 +3,47 @@ import { Image, StyleSheet, View, Text } from "react-native";
 import { Button, ListItem, Icon } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native"
 
-export default function Curso() {
+export default function Alumno() {
   const navigation = useNavigation();
   return (
     <View style={styles.viewBtn}>
-
-<Image
+      {/* source={require('./../../../assets/alumnos1.png')} */}
+      {/* source={{ uri: 'https://picsum.photos/200/300' }} */}
+      {/* source={{ uri: 'https://source.unsplash.com/daily' }} */}
+      <Image
         style={styles.photo}
-        source={require('./../../../assets/Cursos2.jpg')} 
-
+        source={{ uri: 'https://source.unsplash.com/featured/?{student}' }}
       />
       <Button
-        title="Agregar curso"
+        title="Agregar alumno"
         buttonStyle={styles.btnStyle}
         containerStyle={styles.btnContainer}
-        onPress={() => navigation.navigate("cursos-add")}
+        onPress={() => navigation.navigate("alumnos-add")}
       />
-      
       <Button
-        title="Borrar curso"
+        title="Detalle de Alumno"
         buttonStyle={styles.btnStyle}
         containerStyle={styles.btnContainer}
-        onPress={() => navigation.navigate("cursos-delete" )}
+        onPress={() => navigation.navigate("alumnos-det")}
       />
-
       <Button
-        title="Modificar curso"
+        title="Lista de Alumnos"
         buttonStyle={styles.btnStyle}
         containerStyle={styles.btnContainer}
-        onPress={() => navigation.navigate("cursos-update" )}
+        onPress={() => navigation.navigate("alumnos-list")}
       />
-
       <Button
-        title="Lista de cursos"
+        title="Alumnos por grupo"
         buttonStyle={styles.btnStyle}
         containerStyle={styles.btnContainer}
-        onPress={() => navigation.navigate("cursos-list")}
+        onPress={() => navigation.navigate("alumnos-gpo")}
       />
-
+      <Button
+        title="Alumnos JSON"
+        buttonStyle={styles.btnStyle}
+        containerStyle={styles.btnContainer}
+        onPress={() => navigation.navigate("alumnos-json")}
+      />
     </View>
   );
 }

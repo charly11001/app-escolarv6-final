@@ -8,9 +8,11 @@ export default function Grupo() {
   return (
     <View style={styles.viewBtn}>
 
-      <Image
+<Image
         style={styles.photo}
-        source={{ uri: 'https://source.unsplash.com/featured/?{student}' }}
+
+         source={require('./../../../assets/Grupos.png')} 
+     
       />
       <Button
         title="Agregar grupo"

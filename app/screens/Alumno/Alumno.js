@@ -7,50 +7,39 @@ export default function Alumno() {
   const navigation = useNavigation();
   return (
     <View style={styles.viewBtn}>
-      {/* source={require('./../../../assets/alumnos1.png')} */}
-      {/* source={{ uri: 'https://picsum.photos/200/300' }} */}
-      {/* source={{ uri: 'https://source.unsplash.com/daily' }} */}
-      <Image
+<Image
         style={styles.photo}
-
-         source={require('./../../../assets/Alumnos.png')} 
-        
-        
-       // source={{ uri: 'https://source.unsplash.com/featured/?{student}' }}
-      
-      
-      
+        source={{ uri: 'https://source.unsplash.com/featured/?{student}' }}
       />
+
       <Button
         title="Agregar alumno"
         buttonStyle={styles.btnStyle}
         containerStyle={styles.btnContainer}
         onPress={() => navigation.navigate("alumnos-add")}
       />
+      
       <Button
-        title="Detalle de Alumno"
+        title="Borrar alumno"
         buttonStyle={styles.btnStyle}
         containerStyle={styles.btnContainer}
-        onPress={() => navigation.navigate("alumnos-det")}
+        onPress={() => navigation.navigate("alumnos-delete" )}
       />
+
       <Button
-        title="Lista de Alumnos"
+        title="Modificar alumno"
+        buttonStyle={styles.btnStyle}
+        containerStyle={styles.btnContainer}
+        onPress={() => navigation.navigate("alumnos-update" )}
+      />
+
+      <Button
+        title="Lista de alumnos"
         buttonStyle={styles.btnStyle}
         containerStyle={styles.btnContainer}
         onPress={() => navigation.navigate("alumnos-list")}
       />
-      <Button
-        title="Alumnos por grupo"
-        buttonStyle={styles.btnStyle}
-        containerStyle={styles.btnContainer}
-        onPress={() => navigation.navigate("alumnos-gpo")}
-      />
-      <Button
-        title="Alumnos JSON"
-        buttonStyle={styles.btnStyle}
-        containerStyle={styles.btnContainer}
-        onPress={() => navigation.navigate("alumnos-json")}
-      />
+
     </View>
   );
 }
@@ -79,8 +68,8 @@ const styles = StyleSheet.create({
     alignItems: "center"
   },
   photo: {
-    height: 140,
-    width: 140,
+    height: 240,
+    width: 240,
     marginBottom: 20,
     marginTop: 20
   }

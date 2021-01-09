@@ -1,38 +1,31 @@
-import React, { useState, useEffect } from "react";
-import { FlatList, StyleSheet, Text, View } from "react-native";
+import React, { useState } from "react";
+import { StyleSheet, View, Text } from "react-native";
+import { FlatList } from 'react-native-gesture-handler';
 
+import useFetch from '../../hooks/useFetch';
 
-export default function AlumnoList() {
+export default function AlumnoList({ navigation }) {
 
-    const [users, setUsers] = useState([])
-    const [loading, setLoading] = useState(true)
-
-    useEffect(() => {
-        fetch('https://jsonplaceholder.typicode.com/users')
-            .then(response => response.json())
-            .then(data => {
-                setUsers(data)
-                setLoading(false)
-            })
-    }, [])
-
-    if (loading) {
-        return <View style={styles.center}><Text>Cargando ...</Text></View>
-    }
+    const { loading, data: alumnos } = useFetch('http://192.168.100.2:3000/alumnos')
 
     return (
-        <View style={styles.container} >
-            <FlatList
-                data={users}
-                renderItem={({ item }) => <Text style={styles.item}>{item.name}</Text>}
+        <View style={styles.container}>
+            {loading ? <Text>Cargando ...</Text> :
+                <FlatList
+
+                data={alumnos}
+                renderItem={({ item }) => <Text style={styles.item}>{item.nomAlumno}</Text>
+            }
                 keyExtractor={item => String(item.id)}
             />
-        </View >
+            }
+                             
+        </View>
     );
 }
 
-
 const styles = StyleSheet.create({
+   
     center: {
         flex: 1,
         alignItems: 'center',
@@ -52,4 +45,6 @@ const styles = StyleSheet.create({
         borderBottomColor: '#ccc',
         borderBottomWidth: 1
     },
+
 })
+

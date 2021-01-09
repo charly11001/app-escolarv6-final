@@ -2,10 +2,10 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import Docentes from "../screens/Docente/Docente";
 import DocentesAdd from "../screens/Docente/DocenteAdd";
-import DocentesDet from "../screens/Docente/DocenteDet";
+
 import DocentesList from "../screens/Docente/DocenteList";
-
-
+import DocentesDelete from "../screens/Docente/DocenteDelete";
+import DocentesActualizar from "../screens/Docente/DocenteActualizar";
 
 
 const Stack = createStackNavigator();
@@ -23,24 +23,29 @@ export default function AlumnosStack() {
         component={DocentesAdd}
         options={{ title: "Agregar Docentes" }}
       />
-      <Stack.Screen
-        name="docentes-det"
-        component={DocentesDet}
-        options={{ title: "Detalle de los docentes" }}
-      />
-      
+ 
       <Stack.Screen
         name="docentes-list"
         component={DocentesList}
         options={{ title: "Lista de Docentes" }}
       />
-      
-      
-      
-    
-    
-    
-    
+   
+      <Stack.Screen
+        name="docentes-delete"
+        component={DocentesDelete}
+        options={{ title: "Eliminar Docentes" }}
+      />
+   
+
+
+   <Stack.Screen
+        name="docentes-update"
+        component={DocentesActualizar}
+        options={{ title: "Actualizar Docentes" }}
+      />
+
+   
+
     </Stack.Navigator>
   );
 }

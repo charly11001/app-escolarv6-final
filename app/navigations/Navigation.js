@@ -34,11 +34,6 @@ export default function Navigation() {
           component={AlumnosStack}
           options={{ title: "Alumnos" }}
         />
-        <Tab.Screen
-          name="grupos"
-          component={GruposStack}
-          options={{ title: "Grupos" }}
-        />
         
                   
 
@@ -77,6 +72,8 @@ function screenOptions(route, color) {
     case "alumnos":
       iconName = "account";
       break;
+
+
     case "grupos":
       iconName = "account-group";
       break;

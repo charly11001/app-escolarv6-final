@@ -8,9 +8,11 @@ export default function Carrera() {
   return (
     <View style={styles.viewBtn}>
 
-      <Image
+<Image
         style={styles.photo}
-        source={{ uri: 'https://source.unsplash.com/featured/?{student}' }}
+
+         source={require('./../../../assets/Carreras.jpg')} 
+     
       />
       <Button
         title="Agregar carrera"
@@ -18,6 +20,21 @@ export default function Carrera() {
         containerStyle={styles.btnContainer}
         onPress={() => navigation.navigate("carreras-add")}
       />
+      
+      <Button
+        title="Borrar carrera"
+        buttonStyle={styles.btnStyle}
+        containerStyle={styles.btnContainer}
+        onPress={() => navigation.navigate("carreras-delete" )}
+      />
+
+      <Button
+        title="Modificar carrera"
+        buttonStyle={styles.btnStyle}
+        containerStyle={styles.btnContainer}
+        onPress={() => navigation.navigate("carreras-update" )}
+      />
+
       <Button
         title="Lista de Carreras"
         buttonStyle={styles.btnStyle}
@@ -42,7 +59,7 @@ const styles = StyleSheet.create({
     marginTop: 0
   },
   btnStyle: {
-    backgroundColor: "#00a680"
+    backgroundColor: "#800600"
   },
   btnContainer: {
     width: "70%",

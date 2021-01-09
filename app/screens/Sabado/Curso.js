@@ -3,12 +3,15 @@ import { Image, StyleSheet, View, Text } from "react-native";
 import { Button, ListItem, Icon } from "react-native-elements";
 import { useNavigation } from "@react-navigation/native"
 
-export default function Curso() {
+export default function curso() {
   const navigation = useNavigation();
   return (
     <View style={styles.viewBtn}>
-
-<Image
+      {/* source={{ uri: 'https://source.unsplash.com/daily' }} */}
+      {/* source={require('../../../assets/groups_people1.png')} */}
+      {/* source={{ uri: 'https://source.unsplash.com/featured/?{student}' }} */}
+      {/* source={{ uri: 'https://source.unsplash.com/featured/?group' }} */}
+      <Image
         style={styles.photo}
         source={require('./../../../assets/Cursos2.jpg')} 
 
@@ -19,26 +22,26 @@ export default function Curso() {
         containerStyle={styles.btnContainer}
         onPress={() => navigation.navigate("cursos-add")}
       />
-      
+
       <Button
-        title="Borrar curso"
+        title="Detalle del curso"
         buttonStyle={styles.btnStyle}
         containerStyle={styles.btnContainer}
-        onPress={() => navigation.navigate("cursos-delete" )}
+        onPress={() => navigation.navigate("cursos-det")}
       />
 
       <Button
-        title="Modificar curso"
-        buttonStyle={styles.btnStyle}
-        containerStyle={styles.btnContainer}
-        onPress={() => navigation.navigate("cursos-update" )}
-      />
-
-      <Button
-        title="Lista de cursos"
+        title="Lista de cursos disponibles"
         buttonStyle={styles.btnStyle}
         containerStyle={styles.btnContainer}
         onPress={() => navigation.navigate("cursos-list")}
+      />
+
+      <Button
+        title="Lista de cursos por carrera"
+        buttonStyle={styles.btnStyle}
+        containerStyle={styles.btnContainer}
+        onPress={() => navigation.navigate("cursos-carr")}
       />
 
     </View>
@@ -46,16 +49,21 @@ export default function Curso() {
 }
 
 const styles = StyleSheet.create({
-
   textTitle: {
     marginTop: 20,
-    marginBottom: 20,
     textAlign: "center",
     fontSize: 30,
     fontWeight: "bold"
   },
-  listStyle: {
-    marginTop: 0
+  photo: {
+    height: 240,
+    width: 240,
+    marginBottom: 20,
+    marginTop: 20
+  },
+  viewBtn: {
+    flex: 6,
+    alignItems: "center"
   },
   btnStyle: {
     backgroundColor: "#800600"
@@ -64,15 +72,5 @@ const styles = StyleSheet.create({
     width: "70%",
     marginBottom: 10
   },
-  viewBtn: {
-    flex: 6,
-    alignItems: "center"
-  },
-  photo: {
-    height: 240,
-    width: 240,
-    marginBottom: 20,
-    marginTop: 20
-  }
 });
 

@@ -1,10 +1,8 @@
 import React, { useState } from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { FlatList } from 'react-native-gesture-handler';
-import ListItem from '../../components/Carrera/ListItem';
-import useFetch from '../../hooks/useFetch';
-import CarrerasDet from "../../screens/Carrera/CarreraDet";
 
+import useFetch from '../../hooks/useFetch';
 
 export default function CarreraList({ navigation }) {
 
@@ -14,29 +12,39 @@ export default function CarreraList({ navigation }) {
         <View style={styles.container}>
             {loading ? <Text>Cargando ...</Text> :
                 <FlatList
-                    style={styles.list}
-                    data={carreras}
-                    keyExtractor={x => x.id}
-                    renderItem={({ item }) =>
-                        <ListItem
-                            onPress={() => navigation.navigate('carreras-det', { id: item.id, nomCarrera: item.nomCarrera })}
-                            nomCarrera={item.nomGrupo}
-                        />
-                    }
-                />}
+
+                data={carreras}
+                renderItem={({ item }) => <Text style={styles.item}>{item.nomCarrera}</Text>
+            }
+                keyExtractor={item => String(item.id)}
+            />
+            }
+                             
         </View>
     );
 }
 
 const styles = StyleSheet.create({
+   
+    center: {
+        flex: 1,
+        alignItems: 'center',
+        justifyContent: 'center'
+    },
     container: {
         flex: 1,
         backgroundColor: '#fff',
-        alignItems: 'flex-start',
-        justifyContent: 'flex-start',
+        alignItems: 'stretch',
+        justifyContent: 'center',
+        paddingTop: 22
     },
-    list: {
-        alignSelf: 'stretch',
-    }
-});
+    item: {
+        padding: 10,
+        fontSize: 22,
+        height: 50,
+        borderBottomColor: '#ccc',
+        borderBottomWidth: 1
+    },
+
+})
 

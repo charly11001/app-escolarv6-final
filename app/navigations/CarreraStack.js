@@ -2,8 +2,10 @@ import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import Carreras from "../screens/Carrera/Carrera";
 import CarrerasAdd from "../screens/Carrera/CarreraAdd";
-import CarrerasDet from "../screens/Carrera/CarreraDet";
+
 import CarrerasList from "../screens/Carrera/CarreraList";
+import CarrerasDelete from "../screens/Carrera/CarreraDelete";
+import CarrerasActualizar from "../screens/Carrera/CarreraActualizar";
 
 
 const Stack = createStackNavigator();
@@ -28,12 +30,21 @@ export default function AlumnosStack() {
         options={{ title: "Lista de Carreras" }}
       />
    
+      <Stack.Screen
+        name="carreras-delete"
+        component={CarrerasDelete}
+        options={{ title: "Eliminar Carreras" }}
+      />
+   
+
 
    <Stack.Screen
-        name="carreras-det"
-        component={CarrerasDet}
-        options={{ title: "Detalle de Carreras" }}
+        name="carreras-update"
+        component={CarrerasActualizar}
+        options={{ title: "Actualizar Carreras" }}
       />
+
+   
 
     </Stack.Navigator>
   );
